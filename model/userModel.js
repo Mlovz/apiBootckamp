@@ -4,11 +4,19 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     default: "",
+    unique: true,
+  },
+  avatar: {
+    type: String,
+    default: "",
+  },
+  fullname: {
+    type: String,
+    default: "",
   },
   email: {
     type: String,
     default: "",
-    unique: true,
   },
   password: {
     type: String,

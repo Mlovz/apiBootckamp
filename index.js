@@ -7,6 +7,7 @@ import authRoute from "./routes/authRoute.js";
 
 const app = express();
 
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.json());
 
