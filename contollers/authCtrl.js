@@ -72,4 +72,6 @@ export const authCtrl = {
       });
     } catch (err) {}
   },
+
+  refreshToken: async (req, res) => {},
 };

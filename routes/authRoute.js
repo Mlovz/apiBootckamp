@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post("/login", authCtrl.login);
 router.post("/register", authCtrl.register);
+router.get("/refresh_token", authCtrl.refreshToken);
 
 router.post("/confirm", (req, res) => {});
 router.post("/forgot", (req, res) => {});
