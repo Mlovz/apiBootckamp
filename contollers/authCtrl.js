@@ -73,5 +73,33 @@ export const authCtrl = {
     } catch (err) {}
   },
 
-  refreshToken: async (req, res) => {},
+  getUser: async (req, res) => {
+    try {
+      const rfToken = req.cookies.refreshtoken;
+
+      if (!rfToken) return res.json({ message: "Please login now!" });
+
+      jwt.verify(
+        rfToken,
+        process.env.REFRESH_TOKEN_SECRET,
+        async (err, result) => {
+          if (err) return res.json({ message: "Please login now!" });
+
+          const user = await User.findById({ _id: result.id });
+
+          if (!user) return res.json({ message: "User does not exist!" });
+
+          const accessToken = jwt.sign(
+            { id: user._id },
+            process.env.ACCESS_TOKEN_SECRET,
+            {
+              expiresIn: "1d",
+            }
+          );
+
+          res.json({ user, accessToken });
+        }
+      );
+    } catch (err) {}
+  },
 };

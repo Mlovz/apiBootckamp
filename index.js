@@ -1,25 +1,24 @@
 import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-dotenv.config();
+import cookieParser from "cookie-parser";
 import authRoute from "./routes/authRoute.js";
-
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 
-app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 mongoose
   .connect(process.env.DB)
-  .then(() => console.log("Успешное подключение к БД..."))
-  .catch((err) => console.log(err));
-
-const port = process.env.PORT;
+  .then(() => console.log("DB..."))
+  .catch(() => console.log("Error"));
 
 app.use("/api", authRoute);
 
-app.listen(port, () => {
-  console.log("Сервер запущен на порте " + port);
+const PORT = 5000;
+
+app.listen(PORT, () => {
+  console.log("Server listening " + PORT);
 });
