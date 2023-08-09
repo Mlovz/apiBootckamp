@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  aaaa: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 export default mongoose.model("user", userSchema);

@@ -102,4 +102,10 @@ export const authCtrl = {
       );
     } catch (err) {}
   },
+
+  getProducts: async () => {
+    try {
+      const products = await User.find().populate("user", "username avatar ");
+    } catch (err) {}
+  },
 };
